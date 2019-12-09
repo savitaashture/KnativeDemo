@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: third
+  name: third
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: third
+  template:
+    metadata:
+      labels:
+        app: third
+    spec:
+      containers:
+        - image: savita3020/deployment-c:first
+          env:
+          - name: PORT
+            value: "80"
+          name: third
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: third
+  name: third
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: third

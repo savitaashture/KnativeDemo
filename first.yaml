@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: first
+  name: first
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: first
+  template:
+    metadata:
+      labels:
+        app: first
+    spec:
+      containers:
+        - image: savita3020/deployment-a:first
+          ports:
+            - containerPort: 8080
+          name: first
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: first
+  name: first
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+      nodePort: 30001
+  selector:
+    app: first
+  type: NodePort

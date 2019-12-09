@@ -1,0 +1,11 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  labels:
+    serving.knative.dev/visibility: "cluster-local"
+  name: third
+spec:
+  template:
+    spec:
+      containers:
+      - image: savita3020/deployment-c:first
